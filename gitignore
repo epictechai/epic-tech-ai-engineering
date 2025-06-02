@@ -43,7 +43,3 @@ pnpm-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 *.sublime-workspace
-
-# Optional: Unused files from create-next-app if you started with it and then removed them
-# public/next.svg
-# public/vercel.svg
