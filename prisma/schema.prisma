@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Or "sqlite" for local dev if you prefer, but Vercel uses Postgres
+  url      = env("DATABASE_URL")
+}
+
+// --- User Authentication (NextAuth.js) ---
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  // Application-specific fields
+  stripeCustomerId         String?   @unique @map("stripe_customer_id")
+  stripeSubscriptionId     String?   @unique @map("stripe_subscription_id")
+  stripePriceId            String?   @map("stripe_price_id")
+  stripeCurrentPeriodEnd   DateTime? @map("stripe_current_period_end")
+  stripeSubscriptionStatus String?   @map("stripe_subscription_status") // e.g., "active", "canceled", "past_due"
+
+  // Usage tracking (example)
+  generationsMade Int      @default(0)
+  generationLimit Int      @default(100) // Example default limit
+  lastResetDate   DateTime? @map("last_reset_date")
+
+  // Media Generations created by the user
+  mediaGenerations MediaGeneration[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// --- Application Specific Models ---
+
+enum MediaType {
+  TEXT
+  IMAGE
+  AUDIO
+  VIDEO
+  CODE
+  // Add more types as your SaaS evolves
+}
+
+enum GenerationStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELED
+}
+
+model MediaGeneration {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  prompt      String   @db.Text
+  mediaType   MediaType
+  status      GenerationStatus @default(PENDING)
+  outputUrl   String?  // URL to the generated media if stored externally (e.g., S3)
+  outputData  Json?    // Or store small outputs directly as JSON, or path to local file if applicable
+  modelUsed   String?  // e.g., "gpt-4", "dall-e-3"
+  parameters  Json?    // Store any specific parameters used for this generation
+  isPublic    Boolean  @default(false)
+  errorMessage String? @db.Text // If status is FAILED
+
+  @@index([userId])
+  @@index([mediaType])
+  @@index([status])
+}
+
+// You might add models for:
+// - Projects/Workspaces (if users can organize generations)
+// - APIKeys (if you offer API access to users)
+// - UsageLogs (for detailed logging of generations)
+// - Admin/Roles (for app administration)
