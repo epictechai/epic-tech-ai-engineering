@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css"; // Imports the CSS file we just created
+import "./globals.css"; // Imports the CSS file
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,14 +15,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return ( // This is line 16
-    
-
-html
-); }
-
-
-The error `html is not defined` when referring to the `
-
-html
+  return (
+  
 ); }
