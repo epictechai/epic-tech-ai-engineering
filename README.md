@@ -1,42 +1,41 @@
-Epic Tech AI Engineering - Unrestricted Media Generation SaaS
+# Epic Tech AI Engineering - Unrestricted Media Generation SaaS
+
 A powerful SaaS platform for generating any type of media with AI - text, images, music, videos, code, and more without restrictions. Built for the future of creation.
 
-🌟 Features
+🌟 **Features**
+*   **Unrestricted AI Chat Interface:** Generate any type of content through an intuitive chat experience.
+*   **Multi-Modal Generation:** Support for text, images, audio, video, code, and continually expanding.
+*   **Stripe Integration:** Seamless subscription management using your Stripe account.
+*   **Real-time Interaction:** Live AI interaction (WebSocket support planned for future iterations).
+*   **Usage Tracking:** Monitor your generations and understand your limits.
+*   **Responsive Design:** Fully functional on desktop, tablet, and mobile devices.
+*   **Dark Theme:** Modern and sleek cyberpunk-inspired aesthetic.
 
-Unrestricted AI Chat Interface: Generate any type of content through an intuitive chat experience.
-Multi-Modal Generation: Support for text, images, audio, video, code, and continually expanding.
-Stripe Integration: Seamless subscription management using your Stripe account.
-Real-time Interaction: Live AI interaction (WebSocket support planned for future iterations).
-Usage Tracking: Monitor your generations and understand your limits.
-Responsive Design: Fully functional on desktop, tablet, and mobile devices.
-Dark Theme: Modern and sleek cyberpunk-inspired aesthetic.
-🛠 Tech Stack
+🛠 **Tech Stack**
+*   **Frontend:** Next.js 14+, React 18+, TypeScript, Tailwind CSS v3+
+*   **Backend:** Next.js API Routes, Prisma ORM
+*   **Database:** PostgreSQL (recommended for Vercel deployment) or SQLite (for local development).
+*   **Authentication:** NextAuth.js
+*   **Payments:** Stripe (Subscriptions)
+*   **AI Providers:**
+    *   OpenAI (GPT models, DALL-E) - Primary
+    *   (Extensible architecture for Anthropic, Replicate, Nvidia, Groq, and more as listed in your .env)
+*   **Deployment:** Vercel (Recommended)
 
-Frontend: Next.js 14+, React 18+, TypeScript, Tailwind CSS v3+
-Backend: Next.js API Routes, Prisma ORM
-Database: PostgreSQL (recommended for Vercel deployment) or SQLite (for local development).
-Authentication: NextAuth.js
-Payments: Stripe (Subscriptions)
-AI Providers:
-OpenAI (GPT models, DALL-E) - Primary
-(Extensible architecture for Anthropic, Replicate, Nvidia, Groq, and more as listed in your .env)
-Deployment: Vercel (Recommended)
-🚀 Quick Start (Local Development)
+🚀 **Quick Start (Local Development)**
 
-1. Clone Your Repository & Install Dependencies
+**1. Clone Your Repository & Install Dependencies**
+   ```bash
+   # Clone your repository:
+   git clone https://github.com/epictechai/epic-tech-ai-engineering.git
+   cd epic-tech-ai-engineering
 
-# First, create a new repository on GitHub (e.g., "epic-tech-ai-engineering")
-# Then, clone your empty repository:
-# git clone https://github.com/YOUR_USERNAME/epic-tech-ai-engineering.git
-# cd epic-tech-ai-engineering
-
-# (After the Agent provides you with the initial project files, copy them here)
-
-# Install dependencies:
-npm install
+   # Install dependencies:
+   npm install
 2. Environment Setup
 
-Copy the .env.example file to .env.local: bash cp .env.example .env.local
+Copy the .env.example file to .env.local:
+bash       cp .env.example .env.local       
 Fill in your API keys and other environment variables in .env.local. Never commit .env.local to GitHub. Key variables to set: ```env # Database (adjust for your local setup or Vercel Postgres later) DATABASE_URL="postgresql://YOUR_DB_USER:YOUR_DB_PASSWORD@YOUR_DB_HOST:5432/epic_tech_ai_db"
   # NextAuth
   NEXTAUTH_URL="http://localhost:3000" # For local development
@@ -120,16 +119,13 @@ Add API keys to .env.local to enable other providers as they are integrated.
 
 Push to Your GitHub Repository:
 
-git add .
-git commit -m "Initial commit of Epic Tech AI Engineering project"
-git branch -M main # Or your preferred default branch name
-# git remote add origin https://github.com/YOUR_USERNAME/epic-tech-ai-engineering.git
-git push -u origin main
+# (Assuming you've already cloned, added files, and committed)
+git push origin main
 Deploy to Vercel:
 
 Sign up or log in to Vercel.
 Click "Add New..." → "Project".
-Import your GitHub repository.
+Import your GitHub repository (epictechai/epic-tech-ai-engineering).
 Vercel should auto-detect it as a Next.js project.
 Configure Environment Variables: Go to Project Settings → Environment Variables on Vercel and add all the variables from your .env.local file. This is critical for production.
 Deploy.
