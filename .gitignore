@@ -43,3 +43,4 @@ pnpm-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 *.sublime-workspace
+.env
