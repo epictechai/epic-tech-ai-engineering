@@ -1,8 +1,17 @@
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import Features from '@/components/Features';
+import Pricing from '@/components/Pricing';
+import Footer from '@/components/Footer';
+
 export default function HomePage() {
   return (
-    <main>
-      <h1>Welcome to Epic Tech AI Engineering</h1>
-      <p>Generate anything, create everything, no limits.</p>
-    </main>
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      <Hero />
+      <Features />
+      <Pricing />
+      <Footer />
+    </div>
   );
 }

@@ -15,12 +15,15 @@ const config: Config = {
       },
       // Add custom theme extensions here if needed for the "cyberpunk aesthetic"
       // For example:
-      // colors: {
-      //   'cyber-purple': '#7B00FF',
-      //   'cyber-pink': '#FF00FF',
-      //   'cyber-blue': '#00FFFF',
-      //   'dark-bg': '#0A0A0A',
-      // },
+      colors: {
+        'cyber-purple': '#7B00FF',
+        'cyber-pink': '#FF00FF',
+        'cyber-blue': '#00FFFF',
+        'dark-bg': '#0A0A0A',
+      },
+      animation: {
+        'spin-slow': 'spin 20s linear infinite',
+      },
     },
   },
   plugins: [],
